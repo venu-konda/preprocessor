@@ -1,0 +1,31 @@
+name: Build and smoke test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build from clean
+        working-directory: PREPROCESSOR
+        run: make -B
+
+      - name: Smoke test on the bundled samples
+        working-directory: PREPROCESSOR
+        run: |
+          ./a.out -E 4.c
+          grep -q 'int i=10;' 4.i
+          ./a.out -E 1.c
+          test "$(grep -c '=10;' 1.i)" -eq 5
+          ./a.out -E 5.c
+          grep -q '^ABC' 5.i && grep -q 'int main()' 5.i
+          echo "preprocessor OK"
+
+      - name: Build the legacy single-file version
+        working-directory: PREPROCESSOR
+        run: cc preprocessor1.c -o preprocessor1
