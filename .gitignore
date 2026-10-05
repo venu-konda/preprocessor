@@ -1,0 +1,12 @@
+# Build artifacts
+*.o
+a.out
+preprocessor1
+
+# Preprocessor output files
+*.i
+
+# Editor and OS noise
+*.swp
+*~
+.DS_Store
