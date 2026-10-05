@@ -1,5 +1,7 @@
 # preprocessor
 
+[![Build and smoke test](https://github.com/venu-konda/preprocessor/actions/workflows/build.yml/badge.svg)](https://github.com/venu-konda/preprocessor/actions/workflows/build.yml)
+
 A small C preprocessor written in C. Given a `.c` file, it performs the three
 classic preprocessing steps and writes the result to a `.i` file:
 
